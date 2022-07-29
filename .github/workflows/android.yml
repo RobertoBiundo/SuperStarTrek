@@ -45,7 +45,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = context.payload.number;
+            const pull_number = $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH");
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
@@ -59,7 +59,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = context.payload.number;
+            const pull_number = $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH");
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
