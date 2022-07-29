@@ -1,4 +1,3 @@
-
 name: Generate a Sign APK
 
 on:
@@ -51,7 +50,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = ${{PR}};
+            const pull_number = "${{PR}}"
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
@@ -65,7 +64,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = ${{PR}};
+            const pull_number = "${{PR}}"
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
