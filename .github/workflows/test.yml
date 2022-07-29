@@ -1,4 +1,4 @@
-name: Generate a Sign APK
+name: Run Tests
 
 on:
   pull_request:
