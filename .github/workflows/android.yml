@@ -4,6 +4,7 @@ name: Generate a Sign APK
 on:
   pull_request:
     types:
+      - opened
       - synchronized
   push:
     branches:
