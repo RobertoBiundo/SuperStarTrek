@@ -36,6 +36,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Find Current Pull Request Number
+        uses: jwalton/gh-find-current-pr@v1.3.0
+
       - name: Test
         run: ./gradlew test
 
@@ -45,7 +48,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH");
+            const pull_number = ${PR};
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
@@ -59,7 +62,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           script: |
-            const pull_number = $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH");
+            const pull_number = ${PR};
             await github.pulls.createReview({
               ...context.repo,
               pull_number,
