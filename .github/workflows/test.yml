@@ -24,12 +24,14 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             const pull_number = "${{github.event.number}}"
-            await github.pulls.createReview({
-              ...context.repo,
-              pull_number,
-              body: "All tests passed.",
-              event: "APPROVE"
-            })
+            if (pull_number != null && pull_number != "") {
+              await github.pulls.createReview({
+                ...context.repo,
+                pull_number,
+                body: "All tests passed.",
+                event: "APPROVE"
+              })
+            }
 
       - name: Test Fail
         if: failure()
@@ -38,14 +40,16 @@ jobs:
           github-token: ${{ github.token }}
           script: |
             const pull_number = "${{github.event.number}}"
-            await github.pulls.createReview({
-              ...context.repo,
-              pull_number,
-              body: "There is something wrong with test codes.",
-             event: "REQUEST_CHANGES"
-            })
-            await github.pulls.update({
-              ...context.repo,
-              pull_number,
-              state: "closed"
-            })
+            if (pull_number != null && pull_number != "") {
+              await github.pulls.createReview({
+                ...context.repo,
+                pull_number,
+                body: "There is something wrong with test codes.",
+               event: "REQUEST_CHANGES"
+              })
+              await github.pulls.update({
+                ...context.repo,
+                pull_number,
+                state: "closed"
+              })
+            }
