@@ -1,0 +1,25 @@
+apply plugin: 'jacoco'
+
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'connectedAndroidTest']) {
+
+    group = "Reporting"
+    description = "Generate Jacoco test coverage report"
+
+    reports {
+        xml.setEnabled(true)
+        html.setEnabled(true)
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    def javaTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug/classes", excludes: fileFilter)
+
+    getSourceDirectories().setFrom(files([mainSrc]))
+    getClassDirectories().setFrom(files([javaTree]))
+    getExecutionData().setFrom(fileTree(dir: "$buildDir", includes: [
+            "**/*.exec",
+            "**/*.ec"
+    ]))
+}

@@ -1,5 +1,8 @@
 package com.bugbinc.superstartrek.world;
 
+import com.bugbinc.superstartrek.game.GameLength;
+import com.bugbinc.superstartrek.game.GameSettings;
+
 public class Universe {
     // Static variable reference of instance of the universe
     private static Universe instance = null;
@@ -36,6 +39,36 @@ public class Universe {
             instance = new Universe(8, 8);
 
         return instance;
+    }
+
+    /**
+     * Initializes the universe using the current Game Settings
+     *
+     * @throws IllegalArgumentException If the game settings length are not valid
+     */
+    public void initializeMapUsingGameSettings() throws IllegalArgumentException {
+        GameSettings gameSettings = GameSettings.getInstance();
+        GameLength gameLength = gameSettings.getGameLength();
+
+        // Initialize the map with the game length
+        // Since we control the board size we are sure that we can fit all elements in the universe
+        // therefore we do not check for the initializeMap IllegalArgumentException
+        switch (gameLength) {
+            case SHORT:
+                initializeUniverse(8, 8);
+                initializeMap(100, 10, 2, 2);
+                break;
+            case MEDIUM:
+                initializeUniverse(8, 8);
+                initializeMap(150, 20, 3, 2);
+                break;
+            case LONG:
+                initializeUniverse(8, 8);
+                initializeMap(250, 40, 4, 2);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid game length");
+        }
     }
 
     /**

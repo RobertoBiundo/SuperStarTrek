@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_new_game"
+        android:icon="@drawable/ic_button_menu_add"
+        android:title="@string/menu_action_new_game"
+        app:showAsAction="ifRoom"/>
+
+</menu>
