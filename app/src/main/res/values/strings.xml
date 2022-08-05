@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SuperStarTrek</string>
+
+    <string name="menu_action_new_game">New Game</string>
+
+    <string name="new_game_dialog_title">Start a new game?</string>
+    <string name="new_game_dialog_game_length_title">Select a game length</string>
+    <string name="new_game_dialog_game_length_long">Long</string>
+    <string name="new_game_dialog_game_length_medium">Medium</string>
+    <string name="new_game_dialog_game_length_short">Short</string>
+    <string name="new_game_dialog_start">Start</string>
+    <string name="new_game_dialog_cancel">Cancel</string>
+
 </resources>
